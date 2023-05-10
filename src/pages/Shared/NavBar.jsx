@@ -1,8 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
 const NavBar = () => {
+  const menuItems = (
+    <>
+      <li>
+        {" "}
+        <NavLink to="/">Home</NavLink>{" "}
+      </li>
+      <li>
+        {" "}
+        <NavLink to="/services">Services</NavLink>{" "}
+      </li>
+      <li>
+        {" "}
+        <NavLink to="/blogs">Blogs</NavLink>{" "}
+      </li>
+      <li>
+        {" "}
+        <NavLink to="/about">About</NavLink>{" "}
+      </li>
+      <li>
+        {" "}
+        <NavLink to="/contact">Contact</NavLink>{" "}
+      </li>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -28,71 +52,18 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li tabIndex={0}>
-                <a className="justify-between">
-                  Parent
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                  </svg>
-                </a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {menuItems}
             </ul>
           </div>
-          <Link to="/" className="normal-case text-xl order-1 md:order-2 flex-1 md:flex-auto">
+          <Link
+            to="/"
+            className="normal-case text-xl order-1 md:order-2 flex-1 md:flex-auto"
+          >
             <img className="h-8 sm:h-16 p-2" src={logo} alt="Logo" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li tabIndex={0}>
-              <a>
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
         <div className="hidden md:flex navbar-end">
           <button className="btn btn-ghost btn-circle">
@@ -173,8 +144,8 @@ const NavBar = () => {
             </ul>
           </div>
 
-          <Link to="/appointment" className="btn ml-4">
-            Appointment
+          <Link to="/appointment" className="ml-3">
+            <button className="btn btn-outline btn-primary">Appointment</button>
           </Link>
         </div>
       </div>
