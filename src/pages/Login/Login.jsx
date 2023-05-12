@@ -1,11 +1,30 @@
-import React from "react";
+import { useContext, useState } from "react";
 import img from "../../assets/images/login/login.svg";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
-  const handleLogin = (event) => {
-    event.preventDefault();
-  };
+    const { signIn } = useContext(AuthContext);
+    const [error, setError] = useState("");
+
+    const handleLogin = (event) => {
+      event.preventDefault();
+
+      setError("");
+      const form = event.target;
+      const email = form.email.value;
+      const password = form.password.value;
+
+      signIn(email, password)
+        .then((result) => {
+          const loggedUser = result.user;
+          console.log(loggedUser);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content space-x-10 flex-col lg:flex-row">
@@ -52,8 +71,11 @@ const Login = () => {
               </div>
             </form>
             <p className="my-4 text-center">
-              New to Car Care Center?  
-              <Link className="text-primary font-bold" to="/signup"> Sign Up </Link>
+              New to Car Care Center?
+              <Link className="text-primary font-bold" to="/signup">
+                {" "}
+                Sign Up{" "}
+              </Link>
             </p>
           </div>
         </div>

@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const menuItems = (
     <>
       <li>
-        {" "}
-        <NavLink to="/">Home</NavLink>{" "}
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        {" "}
-        <NavLink to="/services">Services</NavLink>{" "}
+        <NavLink to="/services">Services</NavLink>
       </li>
       <li>
-        {" "}
-        <NavLink to="/blogs">Blogs</NavLink>{" "}
+        <NavLink to="/blogs">Blogs</NavLink>
       </li>
       <li>
-        {" "}
-        <NavLink to="/about">About</NavLink>{" "}
+        <NavLink to="/about">About</NavLink>
       </li>
       <li>
-        {" "}
-        <NavLink to="/contact">Contact</NavLink>{" "}
+        <NavLink to="/contact">Contact</NavLink>
       </li>
+      {user?.email ? (
+        <li>
+          <NavLink to="/"><button onClick={logOut}>Log Out</button></NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      )}
     </>
   );
   return (
