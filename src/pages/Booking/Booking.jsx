@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const Booking = () => {
   const service = useLoaderData();
@@ -35,7 +36,9 @@ const Booking = () => {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        if(data.insertedId > 0){
+            toast('Your selected service booked!')
+        }
     })
   }
   return (
