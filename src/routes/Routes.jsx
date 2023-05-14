@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: 'booking/:id',
         element: <Booking />,
-        loader: ({params})=>fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({params})=>fetch(`https://car-care-center-server.vercel.app/services/${params.id}`)
       },
       {
         path: 'bookings',

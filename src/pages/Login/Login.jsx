@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import img from "../../assets/images/login/login.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
@@ -21,22 +22,8 @@ const Login = () => {
 
       signIn(email, password)
         .then((result) => {
-          const loggedUser = result.user;
-          const user = {
-            email: loggedUser.email
-          }
-          fetch('http://localhost:5000/jwt', {
-            method: 'POST',
-            headers:{
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-          })
-          .then(res => res.json())
-          .then(data => {
-            localStorage.setItem('car-access-token', data.token)
-            navigate(from, {replace: true})
-          })
+          const loggedUser = result.user;          
+          navigate(from, {replace: true})
         })
         .catch((error) => {
           setError(error.message);
@@ -88,11 +75,11 @@ const Login = () => {
                 />
               </div>
             </form>
+            <SocialLogin />
             <p className="my-4 text-center">
               New to Car Care Center?
               <Link className="text-primary font-bold" to="/signup">
-                {" "}
-                Sign Up{" "}
+                Sign Up
               </Link>
             </p>
           </div>
